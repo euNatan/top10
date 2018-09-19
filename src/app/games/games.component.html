@@ -1,0 +1,19 @@
+<h2>Meu Top GAMES</h2>
+<ul class="games">
+  <li *ngFor="let game of games" [class.selected]="game === selectedGame" (click)="onSelect(game)">
+    <span class="badge">{{game.rank}}</span> {{game.name}}
+  </li>
+</ul>
+
+<div *ngIf="selectedGame">
+
+  <h2>{{selectedGame.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{selectedGame.id}}</div>
+  <div>
+    <label>Classificação:
+      <input [(ngModel)]="selectedGame.rank" placeholder="classificação">
+      <button (click)="sort()">Reclassificar</button>
+    </label>
+  </div>
+
+</div>
