@@ -5,15 +5,19 @@
   </li>
 </ul>
 
-<div *ngIf="selectedGame">
+<div *ngIf="selectedGame" class="modal">
 
-  <h2>{{selectedGame.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{selectedGame.id}}</div>
-  <div>
-    <label>Classificação:
-      <input [(ngModel)]="selectedGame.rank" placeholder="classificação">
-      <button (click)="sort()">Reclassificar</button>
+  <h2>{{selectedGame.name | uppercase}}</h2>
+    <div>
+    <label class="input">Classificação:
+      <input [(ngModel)]="selectedGame.rank" placeholder="classificação">       <button (click)="sort()">Reclassificar</button>
+      <button (click)="delete()">Remover</button>
     </label>
   </div>
 
 </div>
+
+<label>Adicionar Game:
+  <input [(ngModel)]="addName" placeholder="Nome">
+  <button (click)="add()">add</button>
+</label>

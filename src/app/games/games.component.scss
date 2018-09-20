@@ -1,4 +1,18 @@
+.modal{
+width: 300px;
+height: 174px;
+position: fixed;
+top: 20%;
+left: 47%;
+background-color: #eee;
+padding: 10px;
+box-shadow: 5px 5px #555;
+}
+.input{
 
+  float: left;
+  margin: 0 30px;
+}
 .selected {
   background-color: #CFD8DC !important;
   color: white;
