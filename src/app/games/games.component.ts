@@ -5,9 +5,9 @@ import { Observable } from 'rxjs/Rx';
 import { Game } from '../game';
 import { GAMES } from '../mock-games';
 
-//interface AppState {
-//  counter: number;
-//}
+interface AppState {
+  counter: number;
+}
 
 @Component({
   selector: 'app-games',
@@ -19,6 +19,8 @@ export class GamesComponent implements OnInit {
   games = GAMES;
   item = {};
   selectedGame: Game;
+  addName = "";
+
 
   onSelect(game: Game): void {
     this.selectedGame = game;
@@ -26,7 +28,7 @@ export class GamesComponent implements OnInit {
 
   //crud: Observable<number>;
 
-	constructor(private store: Store){
+	constructor(private store: Store<number>){
 	//this.item = store.select('crud');
 	}
 
@@ -52,7 +54,7 @@ export class GamesComponent implements OnInit {
     var source = Observable
     .interval(10000);
 
-    var subscription = source.subscribe(x =>
+    var subscription = source.subscribe(x => {
       //a cada 10 segundos atualiza a classificação de um item aleatoriamente
       var i = Math.floor(Math.random() * this.games.length)
       this.games[i].rank = Math.floor(Math.random() * 10);
@@ -60,7 +62,7 @@ export class GamesComponent implements OnInit {
             if(a.rank > b.rank)return-1;
             if(a.rank < b.rank)return 1;
       });
-    );
+    });
 
   }
 
