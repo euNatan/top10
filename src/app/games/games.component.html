@@ -10,8 +10,8 @@
   <h2>{{selectedGame.name | uppercase}}</h2>
     <div>
     <label class="input">Classificação:
-      <input [(ngModel)]="selectedGame.rank" placeholder="classificação">       <button (click)="update()">Reclassificar</button>
-      <button (click)="delete()">Remover</button>
+      <input [(ngModel)]="selectedGame.rank" placeholder="classificação"> <button (click)="update()">Reclassificar</button>
+      <button (click)="remove()">Remover</button>
     </label>
   </div>
 

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { ADD, REMOVE, UPDATE } from '../crud';
 import { Observable } from 'rxjs/Rx';
 import { Game } from '../game';
 import { GAMES } from '../mock-games';
 
-interface AppState {
-  counter: number;
-}
+//interface AppState {
+//  counter: number;
+//}
 
 @Component({
   selector: 'app-games',
@@ -22,40 +24,36 @@ export class GamesComponent implements OnInit {
     this.selectedGame = game;
   }
 
-  //atualiza classificação do item selecionado
-  update(){
-    for(var i=0;i<this.games.length;i++) {
-      if (this.games[i].id == this.selectedGame.id){
-        this.games[i].rank = this.selectedGame.rank;
-      }
+  //crud: Observable<number>;
 
-    }
-  }
+	constructor(private store: Store){
+	//this.item = store.select('crud');
+	}
 
-  //inseri um novo item
-  add(){
-    this.item.id = Math.random();
-    this.item.name = this.addName;
-    this.item.rank = 0;
-    this.games.push(this.item);
-    this.item = {}; //limpando variavel
+  //adiciona item a lista
+	add(){
+		this.store.dispatch({ type: ADD, itens: this.games, name: this.addName });
     this.addName = "";
-  }
+	}
 
-  //remove o item selecionado
-  delete(){
-    this.games.splice(this.games.indexOf(this.selectedGame), 1);
-  }
+  //remove item da lista
+	remove(){
+		this.store.dispatch({ type: REMOVE, itens: this.games, selected: this.selectedGame });
+	}
 
-  constructor() { }
+  //atualiza classificação do item na lista
+	update(){
+		this.store.dispatch({ type: UPDATE, itens: this.games, selected: this.selectedGame });
+	}
+
 
   ngOnInit() {
 
     var source = Observable
-    .interval(1000);
+    .interval(10000);
 
     var subscription = source.subscribe(x =>
-
+      //a cada 10 segundos atualiza a classificação de um item aleatoriamente
       var i = Math.floor(Math.random() * this.games.length)
       this.games[i].rank = Math.floor(Math.random() * 10);
       this.games.sort(function compare(a,b){
